@@ -3,3 +3,73 @@
   padding: 0;
   margin: 0;
 }
+/* defining css variables */
+:root {
+  --background: #1e1e2e;
+  --grid: #4b4b5e;
+  --fixed-cell-background: #1e1e2e;
+  --editable-cell-background: #2a2a3b;
+  --primary: #e0e0e0;
+  --highlight: #4a90e2;
+  --error-highlight: #ff5370;
+  --success-highlight: #50fa7b;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--primary);
+  overflow: none;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 6rem;
+  margin-bottom: 12px;
+}
+
+.subTitle {
+  font-size: 1.4rem;
+  opacity: 0.8;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.selection_menu {
+  list-style-type: none;
+}
+
+.menu_item {
+  padding: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.menu_item:hover {
+  transform: scale(1.1);
+}
+
+.links {
+  text-decoration: none;
+  color: var(--primary);
+  opacity: 0.6;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.links:hover {
+  opacity: 1;
+  color: var(--highlight);
+}
+
+
+/* game board design */
+
+.cell {
+
+}
