@@ -1,13 +1,13 @@
-import Block from "./Block";
+import CellBlock from "./CellBlock";
 
-const Board = () => {
+const Block = () => {
   return (
     <div className="block">
       {Array.from({ length: 9 }, (_, index) => (
-        <Block key={index} />
+        <CellBlock key={index} />
       ))}
     </div>
   );
 };
 
-export default Board;
+export default Block;

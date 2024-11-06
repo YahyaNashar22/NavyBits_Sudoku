@@ -15,6 +15,8 @@
   --success-highlight: #50fa7b;
 }
 
+/* layout design */
+
 body {
   background-color: var(--background);
   color: var(--primary);
@@ -39,6 +41,12 @@ body {
   opacity: 0.8;
   text-align: center;
   margin-bottom: 12px;
+}
+
+.boardTitle {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  opacity: 0.8;
 }
 
 .selection_menu {
@@ -67,9 +75,33 @@ body {
   color: var(--highlight);
 }
 
-
-/* game board design */
-
+/* cell design */
 .cell {
+  height: 48px;
+  width: 48px;
+  border: 1px solid var(--grid);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
 
+.cell:hover {
+  color: var(--highlight);
+  border: 1px solid var(--highlight);
+}
+
+.fixed_cell {
+  background-color: var(--fixed-cell-background);
+}
+
+.editable_cell {
+  background-color: var(--editable-cell-background);
+}
+
+/* block design */
+
+.block {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  border: 1px solid #fff;
 }
