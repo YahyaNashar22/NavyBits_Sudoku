@@ -5,7 +5,7 @@ const Board = () => {
     <>
       <div className="block">
         {Array.from({ length: 9 }, (_, index) => (
-          <Block key={index} />
+          <Block key={index} blockId={`block-${index}`} />
         ))}
       </div>
     </>

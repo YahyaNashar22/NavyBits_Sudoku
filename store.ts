@@ -1,11 +1,17 @@
-// import { create } from "zustand";
+import { create } from "zustand";
 
-// interface InputState {
-//   value: number | null;
-//   setValue: (value: number | null) => void;
-// }
+interface CellBlockState {
+  values: Record<string, number | null>;
+  alerts: Record<string, boolean>;
+  setValue: (id: string, value: number | null) => void;
+  setAlertVisible: (id: string, visible: boolean) => void;
+}
 
-// export const useInput = create<InputState>((set) => ({
-//   value: null,
-//   setValue: (value: null | number) => set({ value }),
-// }));
+export const useCellBlockStore = create<CellBlockState>((set) => ({
+  values: {},
+  alerts: {},
+  setValue: (id, value) =>
+    set((state) => ({ values: { ...state.values, [id]: value } })),
+  setAlertVisible: (id, visible) =>
+    set((state) => ({ alerts: { ...state.alerts, [id]: visible } })),
+}));
