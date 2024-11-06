@@ -82,6 +82,19 @@ body {
   border: 1px solid var(--grid);
   transition: 0.3s ease-in-out;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  text-align: center;
+  color: var(--primary);
+  font-size: 2rem;
+  outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+.cell:focus {
+  border: 1px solid var(--highlight);
 }
 
 .cell:hover {
@@ -104,4 +117,56 @@ body {
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
   border: 1px solid #fff;
+  position: relative;
+}
+
+/* Custom Alert Box */
+.custom_alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--grid);
+  padding: 20px 30px;
+  box-shadow: 0 4px 8px 10px var(--background);
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+}
+
+/* Alert Message Text */
+.custom_alert p {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+/* Close Button */
+.custom_alert button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: var(--error-highlight);
+  opacity: 0.8;
+  color: var(--primary);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s ease-in-out;
+}
+
+/* Button Hover Effect */
+.custom_alert button:hover {
+  background-color: var(--error-highlight);
+  opacity: 1;
+}
+
+/* Optional: Dark Overlay Background */
+.custom_alert::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--grid);
+  z-index: -1;
 }
