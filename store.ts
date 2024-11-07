@@ -9,6 +9,7 @@ interface CellBlockState {
   setAlertVisible: (id: string, visible: boolean) => void;
   setCoordinates: (id: string, row: number, column: number) => void;
   validateAllCells: () => void;
+  clearValues: () => void;
 }
 
 export const useCellBlockStore = create<CellBlockState>((set, get) => ({
@@ -72,5 +73,9 @@ export const useCellBlockStore = create<CellBlockState>((set, get) => ({
 
     // Update the store with the new valid statuses
     set({ values: updatedValues });
+  },
+
+  clearValues: () => {
+    set(() => ({ values: {} }));
   },
 }));

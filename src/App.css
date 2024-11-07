@@ -129,7 +129,8 @@ body {
   position: relative;
 }
 
-/* Custom Alert Box */
+/* alert box design */
+
 .custom_alert {
   position: fixed;
   top: 50%;
@@ -143,32 +144,11 @@ body {
   text-align: center;
 }
 
-/* Alert Message Text */
 .custom_alert p {
   font-size: 1.2rem;
   color: var(--primary);
 }
 
-/* Close Button */
-.custom_alert button {
-  margin-top: 15px;
-  padding: 8px 16px;
-  background-color: var(--error-highlight);
-  opacity: 0.8;
-  color: var(--primary);
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: 0.3s ease-in-out;
-}
-
-/* Button Hover Effect */
-.custom_alert button:hover {
-  background-color: var(--error-highlight);
-  opacity: 1;
-}
-
-/* Optional: Dark Overlay Background */
 .custom_alert::before {
   content: "";
   position: fixed;
@@ -178,6 +158,43 @@ body {
   bottom: 0;
   background: var(--grid);
   z-index: -1;
+}
+
+/* buttons designs */
+
+.btn {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  padding: 10px 20px;
+  margin: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--primary);
+  transition: 0.05s ease-in;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn:active {
+  transform: scale(0.9);
+  box-shadow: 2px 2px 10px 4px var(--editable-cell-background);
+}
+
+.check_result_btn:hover {
+  background-color: var(--primary);
+  color: var(--background);
+}
+
+.close_btn {
+  background-color: var(--error-highlight);
+  opacity: 0.8;
+  color: var(--primary);
+  border: none;
+}
+
+.close_btn:hover {
+  background-color: var(--error-highlight);
+  opacity: 1;
 }
 
 /* Mobile Styles */
