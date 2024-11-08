@@ -37,7 +37,9 @@ const CellBlock = ({
   return (
     <>
       <input
-        className="cell"
+        className={`cell ${
+          values[id]?.preset ? "fixed_cell" : "editable_cell"
+        }`}
         style={{
           backgroundColor:
             values[id]?.value && !values[id]?.valid

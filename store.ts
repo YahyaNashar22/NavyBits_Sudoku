@@ -132,7 +132,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
         puzzleValues[cellId] = {
           value: cell || null,
           valid: true,
-          preset: cell !== null,
+          preset: cell !== 0,
         };
       });
     });
