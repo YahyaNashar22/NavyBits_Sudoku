@@ -42,7 +42,11 @@ const CellBlock = ({
         }`}
         style={{
           backgroundColor:
-            values[id]?.value && !values[id]?.valid
+            values[id]?.value && !values[id]?.valid && !values[id]?.preset
+              ? "var(--error-highlight)"
+              : "",
+          color:
+            values[id]?.value && !values[id]?.valid && values[id]?.preset
               ? "var(--error-highlight)"
               : "",
         }}

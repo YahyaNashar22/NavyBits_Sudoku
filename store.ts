@@ -27,33 +27,55 @@ interface CellBlockState {
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   // initial states:
-  values: {},
-  alerts: {},
-  coordinates: {},
+  values: JSON.parse(localStorage.getItem("puzzleValues") || "{}"),
+  alerts: JSON.parse(localStorage.getItem("alerts") || "{}"),
+  coordinates: JSON.parse(localStorage.getItem("coordinates") || "{}"),
   errorExists: false,
   selectedDifficulty: "medium",
 
   setValue: (id, value, valid) => {
-    set((state) => ({
-      values: {
+    set((state) => {
+      const newValues = {
         ...state.values,
-        [id]: {
-          value: value,
-          valid: valid,
-          preset: state.values[id]?.preset ?? false,
-        },
-      },
-    }));
+        [id]: { value, valid, preset: state.values[id]?.preset ?? false },
+      };
+      localStorage.setItem("puzzleValues", JSON.stringify(newValues));
+      return { values: newValues };
+      // values: {
+      //   ...state.values,
+      //   [id]: {
+      //     value: value,
+      //     valid: valid,
+      //     preset: state.values[id]?.preset ?? false,
+      //   },
+      // },
+    });
     get().validateAllCells(); // Re-validate all cells after updating a value
   },
 
   setAlertVisible: (id, visible) =>
-    set((state) => ({ alerts: { ...state.alerts, [id]: visible } })),
+    set(
+      (state) => {
+        const newAlerts = { ...state.alerts, [id]: visible };
+        localStorage.setItem("alerts", JSON.stringify(newAlerts));
+        return { alerts: newAlerts };
+      }
+      // ({ alerts: { ...state.alerts, [id]: visible } })
+    ),
 
   setCoordinates: (id, row, column) =>
-    set((state) => ({
-      coordinates: { ...state.coordinates, [id]: { row, column } },
-    })),
+    set(
+      (state) => {
+        const newCoordinates = { ...state.coordinates, [id]: { row, column } };
+
+        localStorage.setItem("coordinates", JSON.stringify(newCoordinates));
+        return { coordinates: newCoordinates };
+      }
+
+      //   ({
+      //   coordinates: { ...state.coordinates, [id]: { row, column } },
+      // })
+    ),
 
   validateAllCells: () => {
     const { values, coordinates } = get();
@@ -111,6 +133,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
 
   clearValues: () => {
     set(() => ({ values: {} }));
+    localStorage.removeItem("puzzleValues");
   },
 
   setDifficulty: (difficulty: Difficulty) => {
@@ -136,6 +159,8 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
         };
       });
     });
+
+    localStorage.setItem("puzzleValues", JSON.stringify(puzzleValues));
 
     set({ values: puzzleValues, errorExists: false });
   },
