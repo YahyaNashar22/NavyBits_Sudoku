@@ -129,37 +129,6 @@ body {
   position: relative;
 }
 
-/* alert box design */
-
-.custom_alert {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--grid);
-  padding: 20px 30px;
-  box-shadow: 0 4px 8px 10px var(--background);
-  z-index: 1000;
-  width: 300px;
-  text-align: center;
-}
-
-.custom_alert p {
-  font-size: 1.2rem;
-  color: var(--primary);
-}
-
-.custom_alert::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--grid);
-  z-index: -1;
-}
-
 /* buttons designs */
 
 .btn {
@@ -195,6 +164,62 @@ body {
 .close_btn:hover {
   background-color: var(--error-highlight);
   opacity: 1;
+}
+
+.success_btn {
+  border: 1px solid var(--success-highlight);
+  transition: 0.3s ease-in-out;
+}
+
+.success_btn:hover {
+  background-color: var(--success-highlight);
+  color: var(--background);
+}
+
+/* custom dialog */
+
+.custom_dialog_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom_dialog_box {
+  background-color: var(--background);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: popIn 0.3s ease-out;
+}
+
+.custom_dialog_title {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.success_title {
+  color: var(--success-highlight);
+}
+
+.error_title {
+  color: var(--error-highlight);
+}
+
+.custom_dialog_message {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin: 10px auto;
 }
 
 /* Mobile Styles */

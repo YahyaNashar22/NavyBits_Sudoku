@@ -9,10 +9,14 @@ interface CustomAlert {
 
 const CustomAlert: FC<CustomAlert> = ({ title, message, close }) => {
   return (
-    <div className="custom_alert">
-      <h2>{title}</h2>
-      <p>{message}</p>
-      <button className="btn close_btn" onClick={close}>Close</button>
+    <div className="custom_dialog_overlay">
+      <div className="custom_dialog_box">
+        <h2 className="custom_dialog_title error_title">{title}</h2>
+        <p className="custom_dialog_message">{message}</p>
+        <button className="btn close_btn" onClick={close}>
+          Close
+        </button>
+      </div>
     </div>
   );
 };

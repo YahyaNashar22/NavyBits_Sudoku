@@ -4,6 +4,7 @@ interface CellBlockState {
   values: Record<string, { value: number | null; valid: boolean }>;
   alerts: Record<string, boolean>;
   coordinates: Record<string, { row: number; column: number }>;
+  errorExists: boolean;
 
   setValue: (id: string, value: number | null, valid: boolean) => void;
   setAlertVisible: (id: string, visible: boolean) => void;
@@ -16,6 +17,7 @@ export const useCellBlockStore = create<CellBlockState>((set, get) => ({
   values: {},
   alerts: {},
   coordinates: {},
+  errorExists: false,
 
   setValue: (id, value, valid) => {
     set((state) => ({
@@ -37,6 +39,7 @@ export const useCellBlockStore = create<CellBlockState>((set, get) => ({
 
     // Create a copy of the values to update valid status
     const updatedValues = { ...values };
+    let errorFlag = false;
 
     // check for conflicts in row, column, and block
     const isConflict = (
@@ -66,13 +69,14 @@ export const useCellBlockStore = create<CellBlockState>((set, get) => ({
       const cellValue = values[cellId]?.value;
       if (cellValue && isConflict(cellId, row, column, cellValue)) {
         updatedValues[cellId] = { value: cellValue, valid: false };
+        errorFlag = true;
       } else {
         updatedValues[cellId] = { value: cellValue, valid: true };
       }
     }
 
     // Update the store with the new valid statuses
-    set({ values: updatedValues });
+    set({ values: updatedValues, errorExists: errorFlag });
   },
 
   clearValues: () => {
