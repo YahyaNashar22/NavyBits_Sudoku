@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useCellBlockStore } from "../../store";
+import { useGameLogicStore } from "../../store";
 import Board from "../components/Board";
 import CustomAlert from "../components/CustomAlert";
 import Congratulations from "../components/Congratulations";
 
 const Game = () => {
   const { values, errorExists, setAlertVisible, alerts, clearValues } =
-    useCellBlockStore();
+    useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 

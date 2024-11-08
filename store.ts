@@ -1,23 +1,29 @@
 import { create } from "zustand";
 
+type Difficulty = "easy" | "medium" | "hard";
+
 interface CellBlockState {
   values: Record<string, { value: number | null; valid: boolean }>;
   alerts: Record<string, boolean>;
   coordinates: Record<string, { row: number; column: number }>;
   errorExists: boolean;
+  selectedDifficulty: Difficulty;
 
   setValue: (id: string, value: number | null, valid: boolean) => void;
   setAlertVisible: (id: string, visible: boolean) => void;
   setCoordinates: (id: string, row: number, column: number) => void;
   validateAllCells: () => void;
   clearValues: () => void;
+  setDifficulty: (difficulty: Difficulty) => void;
 }
 
-export const useCellBlockStore = create<CellBlockState>((set, get) => ({
+export const useGameLogicStore = create<CellBlockState>((set, get) => ({
+  // initial states:
   values: {},
   alerts: {},
   coordinates: {},
   errorExists: false,
+  selectedDifficulty: "medium",
 
   setValue: (id, value, valid) => {
     set((state) => ({
@@ -81,5 +87,9 @@ export const useCellBlockStore = create<CellBlockState>((set, get) => ({
 
   clearValues: () => {
     set(() => ({ values: {} }));
+  },
+
+  setDifficulty: (difficulty: Difficulty) => {
+    set({ selectedDifficulty: difficulty });
   },
 }));

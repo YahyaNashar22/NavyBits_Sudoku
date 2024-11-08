@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
-import { useCellBlockStore } from "../../store.ts";
+import { useGameLogicStore } from "../../store.ts";
 import CustomAlert from "./CustomAlert.tsx";
 
 const CellBlock = ({
@@ -12,7 +12,7 @@ const CellBlock = ({
   column: number;
 }) => {
   const { values, alerts, setValue, setAlertVisible, setCoordinates } =
-    useCellBlockStore();
+    useGameLogicStore();
 
   useEffect(() => {
     setCoordinates(id, row, column);

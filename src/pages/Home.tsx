@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useCellBlockStore } from "../../store";
+import { useGameLogicStore } from "../../store";
 
 const Home = () => {
-  const { clearValues } = useCellBlockStore();
+  const { clearValues } = useGameLogicStore();
   return (
     <main className="wrapper">
       <h1 className="title">Sudoku</h1>
