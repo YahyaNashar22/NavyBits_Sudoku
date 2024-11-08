@@ -9,7 +9,7 @@ const Board = () => {
         return (
           <Block
             key={index}
-            blockId={`block-${index}`}
+            blockId={`${index}`}
             startRow={startRow}
             startColumn={startColumn}
           />

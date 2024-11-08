@@ -222,6 +222,33 @@ body {
   margin: 10px auto;
 }
 
+/* difficulty menu */
+
+.difficulty_menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.difficulty_list {
+  list-style-type: none;
+  line-height: 30px;
+}
+
+.difficulty_option {
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  transition: 0.3s ease-in;
+}
+
+.difficulty_option:hover {
+  transform: scale(1.2);
+  color: var(--highlight);
+}
+
 /* Mobile Styles */
 @media screen and (max-width: 600px) {
   .boardTitle {

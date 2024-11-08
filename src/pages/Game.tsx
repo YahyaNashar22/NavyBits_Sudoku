@@ -5,8 +5,7 @@ import CustomAlert from "../components/CustomAlert";
 import Congratulations from "../components/Congratulations";
 
 const Game = () => {
-  const { values, errorExists, setAlertVisible, alerts, clearValues } =
-    useGameLogicStore();
+  const { values, errorExists, setAlertVisible, alerts } = useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
@@ -27,6 +26,8 @@ const Game = () => {
 
     // clearValues();
   };
+
+  console.log(values);
   return (
     <>
       <main className="wrapper">

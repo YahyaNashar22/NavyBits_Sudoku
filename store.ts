@@ -1,9 +1,16 @@
 import { create } from "zustand";
+import {
+  generateFullSolution,
+  createPuzzle,
+} from "./src/utility/puzzleGenerator";
 
-type Difficulty = "easy" | "medium" | "hard";
+export type Difficulty = "easy" | "medium" | "hard";
 
 interface CellBlockState {
-  values: Record<string, { value: number | null; valid: boolean }>;
+  values: Record<
+    string,
+    { value: number | null; valid: boolean; preset: boolean }
+  >;
   alerts: Record<string, boolean>;
   coordinates: Record<string, { row: number; column: number }>;
   errorExists: boolean;
@@ -15,6 +22,7 @@ interface CellBlockState {
   validateAllCells: () => void;
   clearValues: () => void;
   setDifficulty: (difficulty: Difficulty) => void;
+  generatePuzzle: () => void;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -27,7 +35,14 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
 
   setValue: (id, value, valid) => {
     set((state) => ({
-      values: { ...state.values, [id]: { value, valid } },
+      values: {
+        ...state.values,
+        [id]: {
+          value: value,
+          valid: valid,
+          preset: state.values[id]?.preset ?? false,
+        },
+      },
     }));
     get().validateAllCells(); // Re-validate all cells after updating a value
   },
@@ -73,11 +88,20 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     for (const cellId in coordinates) {
       const { row, column } = coordinates[cellId];
       const cellValue = values[cellId]?.value;
+      const preset = values[cellId]?.preset || false;
       if (cellValue && isConflict(cellId, row, column, cellValue)) {
-        updatedValues[cellId] = { value: cellValue, valid: false };
+        updatedValues[cellId] = {
+          value: cellValue,
+          valid: false,
+          preset,
+        };
         errorFlag = true;
       } else {
-        updatedValues[cellId] = { value: cellValue, valid: true };
+        updatedValues[cellId] = {
+          value: cellValue,
+          valid: true,
+          preset,
+        };
       }
     }
 
@@ -91,5 +115,28 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
 
   setDifficulty: (difficulty: Difficulty) => {
     set({ selectedDifficulty: difficulty });
+  },
+
+  generatePuzzle: () => {
+    const fullGrid = generateFullSolution();
+    const difficulty = get().selectedDifficulty;
+    const puzzleGrid = createPuzzle(fullGrid, difficulty);
+
+    const puzzleValues: Record<
+      string,
+      { value: number | null; valid: boolean; preset: boolean }
+    > = {};
+    puzzleGrid.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        const cellId = `${rowIndex}-${columnIndex}`;
+        puzzleValues[cellId] = {
+          value: cell || null,
+          valid: true,
+          preset: cell !== null,
+        };
+      });
+    });
+
+    set({ values: puzzleValues, errorExists: false });
   },
 }));

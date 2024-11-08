@@ -17,7 +17,7 @@ const Block = ({
         return (
           <CellBlock
             key={index}
-            id={`${blockId}-cell-${index}`}
+            id={`${blockId}-${index}`}
             row={row}
             column={column}
           />
