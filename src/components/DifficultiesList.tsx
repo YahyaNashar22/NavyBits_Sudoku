@@ -17,7 +17,7 @@ const DifficultiesList = ({
   };
   return (
     <div className="difficulty_menu">
-      <h2>Select Difficulty</h2>
+      <h1 className="title">Select Difficulty</h1>
       <ul className="difficulty_list">
         <li
           className="difficulty_option"

@@ -127,8 +127,9 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   },
 
   clearValues: () => {
-    set(() => ({ values: {} }));
+    set(() => ({ values: {}, solution: [] }));
     localStorage.removeItem("puzzleValues");
+    localStorage.removeItem("solution");
   },
 
   setDifficulty: (difficulty: Difficulty) => {
@@ -156,12 +157,15 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     });
 
     localStorage.setItem("puzzleValues", JSON.stringify(puzzleValues));
+    localStorage.setItem("solution", JSON.stringify(fullGrid));
 
     set({ values: puzzleValues, errorExists: false, solution: fullGrid });
   },
 
   revealHint: () => {
-    const { values, solution } = get();
+    const { values } = get();
+
+    const solution = JSON.parse(localStorage.getItem("solution") || "{}");
 
     const emptyCells = Object.keys(values).filter(
       (cellId) => values[cellId].value === null
@@ -172,8 +176,9 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     const randomCellId = emptyCells[randomIndex];
     const [row, column] = randomCellId.split("-").map(Number);
-    set((state) => ({
-      values: {
+
+    set((state) => {
+      const newValues = {
         ...state.values,
         [randomCellId]: {
           // replace value with the solution value
@@ -182,7 +187,9 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
           preset: true,
           hinted: true,
         },
-      },
-    }));
+      };
+      localStorage.setItem("puzzleValues", JSON.stringify(newValues));
+      return { values: newValues };
+    });
   },
 }));

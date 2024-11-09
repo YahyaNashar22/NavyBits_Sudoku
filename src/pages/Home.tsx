@@ -7,15 +7,16 @@ const Home = () => {
 
   return (
     <main className="wrapper">
-      <h1 className="title">Sudoku</h1>
-      <p className="subTitle">
-        Welcome to the good ol' Sudoku.
-        <br />
-        What would you like to do?
-      </p>
-
       {!showDifficulties && (
-        <SelectionMenu setShowDifficulties={setShowDifficulties} />
+        <>
+          <h1 className="title">Sudoku</h1>
+          <p className="subTitle">
+            Welcome to the good ol' Sudoku.
+            <br />
+            What would you like to do?
+          </p>
+          <SelectionMenu setShowDifficulties={setShowDifficulties} />
+        </>
       )}
 
       {showDifficulties && (

@@ -44,10 +44,11 @@ body {
 .title {
   font-size: 6rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .subTitle {
-  font-size: 1.4rem;
+  font-size: 2rem;
   opacity: 0.8;
   text-align: center;
   margin-bottom: 12px;
@@ -267,10 +268,10 @@ body {
 }
 
 .difficulty_option {
-  font-size: 1.2rem;
+  font-size: 2rem;
   cursor: pointer;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
   transition: 0.3s ease-in;
 }
 
