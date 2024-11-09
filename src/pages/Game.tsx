@@ -5,8 +5,14 @@ import CustomAlert from "../components/CustomAlert";
 import Congratulations from "../components/Congratulations";
 
 const Game = () => {
-  const { values, errorExists, setAlertVisible, alerts, revealHint } =
-    useGameLogicStore();
+  const {
+    values,
+    errorExists,
+    setAlertVisible,
+    alerts,
+    revealHint,
+    selectedDifficulty,
+  } = useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
@@ -31,7 +37,7 @@ const Game = () => {
   return (
     <>
       <main className="wrapper">
-        <h1 className="boardTitle">Random Puzzle</h1>
+        <h1 className="boardTitle">Puzzle: {selectedDifficulty}</h1>
         <Board />
         <div className="btn_container">
           <button

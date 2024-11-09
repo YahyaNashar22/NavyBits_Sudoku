@@ -148,7 +148,7 @@ body {
   cursor: pointer;
   color: var(--primary);
   transition: 0.05s ease-in scale;
-  transition: 0.3s ease-in ;
+  transition: 0.3s ease-in;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -181,14 +181,23 @@ body {
   opacity: 1;
 }
 
-.success_btn {
-  border: 1px solid var(--success-highlight);
+.play_again_btn {
+  background-color: var(--success-highlight);
+  color: var(--background);
+  opacity: 0.8;
+}
+
+.play_again_btn:hover {
+  opacity: 1;
+}
+
+.success_close_btn {
   transition: 0.3s ease-in-out;
 }
 
-.success_btn:hover {
-  background-color: var(--success-highlight);
-  color: var(--background);
+.success_close_btn:hover {
+  border-color: var(--error-highlight);
+  color: var(--primary);
 }
 
 /* custom dialog */
