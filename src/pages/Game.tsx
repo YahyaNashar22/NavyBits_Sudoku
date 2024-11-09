@@ -28,12 +28,9 @@ const Game = () => {
         return;
       }
     }
-    // TODO: implement end game logic
     setIsCompleted(true);
   };
 
-  // console.log(values);
-  // console.log(solution);
   return (
     <>
       <main className="wrapper">
