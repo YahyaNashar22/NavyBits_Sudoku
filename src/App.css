@@ -158,17 +158,12 @@ body {
   font-size: 1rem;
   font-weight: 500;
   margin: 20px;
+  font-weight: bold;
 }
 
 .btn:active {
   transform: scale(0.9);
   box-shadow: 2px 2px 10px 4px var(--editable-cell-background);
-}
-
-.check_result_btn,
-.hint_btn,
-.solve_btn {
-  font-weight: bold;
 }
 
 .check_result_btn:hover {
@@ -208,6 +203,7 @@ body {
 }
 
 .play_again_btn:hover {
+  box-shadow: 2px 2px 10px 4px var(--success-highlight);
   opacity: 1;
 }
 
