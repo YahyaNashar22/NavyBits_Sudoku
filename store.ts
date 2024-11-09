@@ -2,9 +2,11 @@ import { create } from "zustand";
 import {
   generateFullSolution,
   createPuzzle,
+  createEmptyGrid,
 } from "./src/utility/puzzleGenerator";
+import { solveSudoku } from "./src/utility/backtracking";
 
-export type Difficulty = "easy" | "medium" | "hard";
+export type Difficulty = "easy" | "medium" | "hard" | "custom";
 
 interface CellBlockState {
   values: Record<
@@ -33,7 +35,9 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   alerts: JSON.parse(localStorage.getItem("alerts") || "{}"),
   coordinates: JSON.parse(localStorage.getItem("coordinates") || "{}"),
   errorExists: false,
-  selectedDifficulty: "medium",
+  selectedDifficulty:
+    JSON.parse(localStorage.getItem("selectedDifficulty") as Difficulty) ||
+    "medium",
   solution: [],
 
   setValue: (id, value, valid) => {
@@ -133,13 +137,22 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   },
 
   setDifficulty: (difficulty: Difficulty) => {
+    localStorage.setItem("selectedDifficulty", JSON.stringify(difficulty));
     set({ selectedDifficulty: difficulty });
   },
 
   generatePuzzle: () => {
-    const fullGrid = generateFullSolution();
     const difficulty = get().selectedDifficulty;
-    const puzzleGrid = createPuzzle(fullGrid, difficulty);
+    let fullGrid;
+
+    if (difficulty === "custom") {
+      fullGrid = createEmptyGrid();
+    } else {
+      fullGrid = generateFullSolution();
+    }
+
+    const puzzleGrid =
+      difficulty === "custom" ? fullGrid : createPuzzle(fullGrid, difficulty);
 
     const puzzleValues: Record<
       string,
@@ -149,9 +162,9 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       row.forEach((cell, columnIndex) => {
         const cellId = `${rowIndex}-${columnIndex}`;
         puzzleValues[cellId] = {
-          value: cell || null,
+          value: cell !== 0 ? cell : null,
           valid: true,
-          preset: cell !== 0,
+          preset: difficulty !== "custom" && cell !== 0 && cell !== null,
         };
       });
     });
@@ -163,33 +176,72 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   },
 
   revealHint: () => {
-    const { values } = get();
+    const { values, selectedDifficulty } = get();
 
-    const solution = JSON.parse(localStorage.getItem("solution") || "{}");
+    if (selectedDifficulty === "custom") {
+      // ! Custom Board
 
-    const emptyCells = Object.keys(values).filter(
-      (cellId) => values[cellId].value === null
-    );
+      // create a grid based on the current state of the board
+      const customGrid = Array.from({ length: 9 }, () => Array(9).fill(0));
+      Object.keys(values).forEach((cellId) => {
+        const [row, column] = cellId.split("-").map(Number);
+        customGrid[row][column] = values[cellId].value || 0;
+      });
 
-    if (emptyCells.length === 0) return;
+      if (!solveSudoku(customGrid)) return;
 
-    const randomIndex = Math.floor(Math.random() * emptyCells.length);
-    const randomCellId = emptyCells[randomIndex];
-    const [row, column] = randomCellId.split("-").map(Number);
+      const emptyCells = Object.keys(values).filter(
+        (cellId) => values[cellId].value === null
+      );
 
-    set((state) => {
-      const newValues = {
-        ...state.values,
-        [randomCellId]: {
-          // replace value with the solution value
-          value: solution[row][column],
-          valid: true,
-          preset: true,
-          hinted: true,
-        },
-      };
-      localStorage.setItem("puzzleValues", JSON.stringify(newValues));
-      return { values: newValues };
-    });
+      if (emptyCells.length === 0) return;
+
+      const randomIndex = Math.floor(Math.random() * emptyCells.length);
+      const randomCellId = emptyCells[randomIndex];
+      const [row, column] = randomCellId.split("-").map(Number);
+
+      set((state) => {
+        const newValues = {
+          ...state.values,
+          [randomCellId]: {
+            value: customGrid[row][column],
+            valid: true,
+            preset: true,
+            hinted: true,
+          },
+        };
+
+        localStorage.setItem("puzzleValues", JSON.stringify(newValues));
+        return { values: newValues };
+      });
+    } else {
+      // ! Not a custom Board
+      const solution = JSON.parse(localStorage.getItem("solution") || "{}");
+
+      const emptyCells = Object.keys(values).filter(
+        (cellId) => values[cellId].value === null
+      );
+
+      if (emptyCells.length === 0) return;
+
+      const randomIndex = Math.floor(Math.random() * emptyCells.length);
+      const randomCellId = emptyCells[randomIndex];
+      const [row, column] = randomCellId.split("-").map(Number);
+
+      set((state) => {
+        const newValues = {
+          ...state.values,
+          [randomCellId]: {
+            // replace value with the solution value
+            value: solution[row][column],
+            valid: true,
+            preset: true,
+            hinted: true,
+          },
+        };
+        localStorage.setItem("puzzleValues", JSON.stringify(newValues));
+        return { values: newValues };
+      });
+    }
   },
 }));

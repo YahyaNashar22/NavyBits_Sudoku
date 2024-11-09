@@ -17,7 +17,7 @@ const Game = () => {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const checkResult = () => {
-    if (errorExists) {
+    if (errorExists || Object.keys(values).length === 0) {
       setAlertVisible("Incomplete_puzzle", true);
       return;
     }
@@ -31,10 +31,24 @@ const Game = () => {
     setIsCompleted(true);
   };
 
+  const customBoardHint = () => {
+    if (errorExists && selectedDifficulty === "custom") {
+      setAlertVisible("error_exists", true);
+    } else {
+      revealHint();
+    }
+  };
+
+  console.log(values);
+
   return (
     <>
       <main className="wrapper">
-        <h1 className="boardTitle">Puzzle: {selectedDifficulty}</h1>
+        <h1 className="boardTitle">
+          {selectedDifficulty === "custom"
+            ? "Custom Puzzle"
+            : `Puzzle: ${selectedDifficulty}`}
+        </h1>
         <Board />
         <div className="btn_container">
           <button
@@ -45,7 +59,11 @@ const Game = () => {
             Check Result
           </button>
 
-          <button type="button" className="btn hint_btn" onClick={revealHint}>
+          <button
+            type="button"
+            className="btn hint_btn"
+            onClick={customBoardHint}
+          >
             💡 Hint
           </button>
         </div>
@@ -55,6 +73,14 @@ const Game = () => {
           title="Puzzle Not Finished"
           message="Re-check your board for empty or invalid cells!"
           close={() => setAlertVisible("Incomplete_puzzle", false)}
+        />
+      )}
+
+      {alerts["error_exists"] && (
+        <CustomAlert
+          title="Error Exists"
+          message="Clear all errors first!"
+          close={() => setAlertVisible("error_exists", false)}
         />
       )}
 

@@ -2,7 +2,7 @@ import { Difficulty } from "../../store";
 import { solveSudoku } from "./backtracking";
 
 // create an empty sudoku board
-const createEmptyGrid = (): number[][] => {
+export const createEmptyGrid = (): number[][] => {
   return Array.from({ length: 9 }, () => Array(9).fill(0));
 };
 
