@@ -12,6 +12,7 @@ const Game = () => {
     alerts,
     revealHint,
     selectedDifficulty,
+    solvePuzzle,
   } = useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -36,6 +37,14 @@ const Game = () => {
       setAlertVisible("error_exists", true);
     } else {
       revealHint();
+    }
+  };
+
+  const customBoardSolver = () => {
+    if (errorExists && selectedDifficulty === "custom") {
+      setAlertVisible("error_exists", true);
+    } else {
+      solvePuzzle();
     }
   };
 
@@ -66,6 +75,16 @@ const Game = () => {
           >
             💡 Hint
           </button>
+
+          {selectedDifficulty === "custom" && (
+            <button
+              type="button"
+              className="btn hint_btn"
+              onClick={customBoardSolver}
+            >
+              Solve
+            </button>
+          )}
         </div>
       </main>
       {alerts["Incomplete_puzzle"] && (

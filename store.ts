@@ -27,6 +27,7 @@ interface CellBlockState {
   setDifficulty: (difficulty: Difficulty) => void;
   generatePuzzle: () => void;
   revealHint: () => void;
+  solvePuzzle: () => void;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -242,6 +243,40 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
         localStorage.setItem("puzzleValues", JSON.stringify(newValues));
         return { values: newValues };
       });
+    }
+  },
+
+  solvePuzzle: () => {
+    const { values } = get();
+
+    // Clone the current puzzle grid
+    const currentGrid = Array.from({ length: 9 }, (_, row) =>
+      Array.from(
+        { length: 9 },
+        (_, column) => values[`${row}-${column}`]?.value || 0
+      )
+    );
+
+    if (solveSudoku(currentGrid)) {
+      const solvedValues = { ...values };
+      for (let row = 0; row < 9; row++) {
+        for (let column = 0; column < 9; column++) {
+          const cellId = `${row}-${column}`;
+          if (solvedValues[cellId].value === null) {
+            solvedValues[cellId] = {
+              ...solvedValues[cellId],
+              value: currentGrid[row][column],
+              valid: true,
+              preset: true,
+              hinted: true,
+            };
+          }
+        }
+      }
+      localStorage.setItem("puzzleValues", JSON.stringify(solvedValues));
+      set({ values: solvedValues });
+    } else {
+      alert("No solution exists");
     }
   },
 }));
