@@ -66,6 +66,12 @@ body {
 .menu_item {
   padding: 10px;
   transition: 0.3s ease-in-out;
+  text-align: center;
+}
+
+.menu_item button {
+  width: 100%;
+  margin: 0;
 }
 
 .menu_item:hover {
@@ -143,7 +149,6 @@ body {
   background-color: transparent;
   border: 1px solid var(--primary);
   padding: 10px 20px;
-  margin: 20px;
   text-align: center;
   cursor: pointer;
   color: var(--primary);
@@ -151,6 +156,7 @@ body {
   transition: 0.3s ease-in;
   font-size: 1rem;
   font-weight: 500;
+  margin: 20px;
 }
 
 .btn:active {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DifficultiesList from "../components/DifficultiesList";
+import SelectionMenu from "../components/SelectionMenu";
 
 const Home = () => {
   const [showDifficulties, setShowDifficulties] = useState<boolean>(false);
@@ -13,17 +14,10 @@ const Home = () => {
         What would you like to do?
       </p>
 
-      <ul className="selection_menu">
-        <li className="menu_item">
-          <button
-            className="btn"
-            onClick={() => setShowDifficulties(true)}
-            disabled={showDifficulties}
-          >
-            Solve a new puzzle
-          </button>
-        </li>
-      </ul>
+      {!showDifficulties && (
+        <SelectionMenu setShowDifficulties={setShowDifficulties} />
+      )}
+
       {showDifficulties && (
         <DifficultiesList setShowDifficulties={setShowDifficulties} />
       )}
