@@ -62,10 +62,10 @@ const BoardActions = ({
       {selectedDifficulty === "custom" && (
         <button
           type="button"
-          className="btn hint_btn"
+          className="btn solve_btn"
           onClick={customBoardSolver}
         >
-          Solve
+          ⭐ Solve
         </button>
       )}
     </div>
