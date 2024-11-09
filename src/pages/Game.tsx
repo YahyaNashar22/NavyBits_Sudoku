@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGameLogicStore } from "../../store";
 import Board from "../components/Board";
 import CustomAlert from "../components/CustomAlert";
@@ -6,10 +6,19 @@ import Congratulations from "../components/Congratulations";
 import BoardActions from "../components/BoardActions";
 
 const Game = () => {
-  const { values, setAlertVisible, alerts, selectedDifficulty } =
-    useGameLogicStore();
+  const {
+    values,
+    setAlertVisible,
+    alerts,
+    selectedDifficulty,
+    validateAllCells,
+  } = useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  useEffect(() => {
+    validateAllCells();
+  }, [validateAllCells]);
 
   console.log(values);
 
