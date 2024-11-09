@@ -46,7 +46,9 @@ const CellBlock = ({
               ? "var(--error-highlight)"
               : "",
           color:
-            values[id]?.value && !values[id]?.valid && values[id]?.preset
+            values[id]?.value && values[id]?.hinted
+              ? "var(--success-highlight)"
+              : values[id]?.value && !values[id]?.valid && values[id]?.preset
               ? "var(--error-highlight)"
               : "",
         }}

@@ -9,12 +9,13 @@ export type Difficulty = "easy" | "medium" | "hard";
 interface CellBlockState {
   values: Record<
     string,
-    { value: number | null; valid: boolean; preset: boolean }
+    { value: number | null; valid: boolean; preset: boolean; hinted?: boolean }
   >;
   alerts: Record<string, boolean>;
   coordinates: Record<string, { row: number; column: number }>;
   errorExists: boolean;
   selectedDifficulty: Difficulty;
+  solution: number[][];
 
   setValue: (id: string, value: number | null, valid: boolean) => void;
   setAlertVisible: (id: string, visible: boolean) => void;
@@ -23,6 +24,7 @@ interface CellBlockState {
   clearValues: () => void;
   setDifficulty: (difficulty: Difficulty) => void;
   generatePuzzle: () => void;
+  revealHint: () => void;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -32,6 +34,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   coordinates: JSON.parse(localStorage.getItem("coordinates") || "{}"),
   errorExists: false,
   selectedDifficulty: "medium",
+  solution: [],
 
   setValue: (id, value, valid) => {
     set((state) => {
@@ -41,14 +44,6 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       };
       localStorage.setItem("puzzleValues", JSON.stringify(newValues));
       return { values: newValues };
-      // values: {
-      //   ...state.values,
-      //   [id]: {
-      //     value: value,
-      //     valid: valid,
-      //     preset: state.values[id]?.preset ?? false,
-      //   },
-      // },
     });
     get().validateAllCells(); // Re-validate all cells after updating a value
   },
@@ -162,6 +157,32 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
 
     localStorage.setItem("puzzleValues", JSON.stringify(puzzleValues));
 
-    set({ values: puzzleValues, errorExists: false });
+    set({ values: puzzleValues, errorExists: false, solution: fullGrid });
+  },
+
+  revealHint: () => {
+    const { values, solution } = get();
+
+    const emptyCells = Object.keys(values).filter(
+      (cellId) => values[cellId].value === null
+    );
+
+    if (emptyCells.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    const randomCellId = emptyCells[randomIndex];
+    const [row, column] = randomCellId.split("-").map(Number);
+    set((state) => ({
+      values: {
+        ...state.values,
+        [randomCellId]: {
+          // replace value with the solution value
+          value: solution[row][column],
+          valid: true,
+          preset: true,
+          hinted: true,
+        },
+      },
+    }));
   },
 }));

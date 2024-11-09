@@ -5,7 +5,8 @@ import CustomAlert from "../components/CustomAlert";
 import Congratulations from "../components/Congratulations";
 
 const Game = () => {
-  const { values, errorExists, setAlertVisible, alerts } = useGameLogicStore();
+  const { values, errorExists, setAlertVisible, alerts, revealHint } =
+    useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
@@ -21,25 +22,30 @@ const Game = () => {
         return;
       }
     }
-    // TODO: Clear values after game is over
+    // TODO: implement end game logic
     setIsCompleted(true);
-
-    // clearValues();
   };
 
-  console.log(values);
+  // console.log(values);
+  // console.log(solution);
   return (
     <>
       <main className="wrapper">
         <h1 className="boardTitle">Random Puzzle</h1>
         <Board />
-        <button
-          type="button"
-          className="btn check_result_btn"
-          onClick={checkResult}
-        >
-          Check Result
-        </button>
+        <div className="btn_container">
+          <button
+            type="button"
+            className="btn check_result_btn"
+            onClick={checkResult}
+          >
+            Check Result
+          </button>
+
+          <button type="button" className="btn hint_btn" onClick={revealHint}>
+            💡 Hint
+          </button>
+        </div>
       </main>
       {alerts["Incomplete_puzzle"] && (
         <CustomAlert

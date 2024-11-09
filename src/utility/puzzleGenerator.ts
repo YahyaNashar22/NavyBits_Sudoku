@@ -19,16 +19,16 @@ export const createPuzzle = (
   difficulty: Difficulty
 ): number[][] => {
   const puzzle = fullGrid.map((row) => [...row]);
-  let revealedCells =
+  let hiddenCells =
     difficulty === "easy" ? 40 : difficulty === "medium" ? 50 : 60;
 
-  while (revealedCells > 0) {
+  while (hiddenCells > 0) {
     const row = Math.floor(Math.random() * 9);
     const column = Math.floor(Math.random() * 9);
 
     if (puzzle[row][column] !== 0) {
       puzzle[row][column] = 0;
-      revealedCells--;
+      hiddenCells--;
     }
   }
 

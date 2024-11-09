@@ -13,6 +13,7 @@
   --highlight: #4a90e2;
   --error-highlight: #ff5370;
   --success-highlight: #50fa7b;
+  --yellow-highlight: #f1fa8c;
 }
 
 /* layout design */
@@ -131,6 +132,13 @@ body {
 
 /* buttons designs */
 
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .btn {
   background-color: transparent;
   border: 1px solid var(--primary);
@@ -139,7 +147,8 @@ body {
   text-align: center;
   cursor: pointer;
   color: var(--primary);
-  transition: 0.05s ease-in;
+  transition: 0.05s ease-in scale;
+  transition: 0.3s ease-in ;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -152,6 +161,12 @@ body {
 .check_result_btn:hover {
   background-color: var(--primary);
   color: var(--background);
+}
+
+.hint_btn:hover {
+  background-color: var(--yellow-highlight);
+  color: var(--background);
+  box-shadow: 2px 2px 10px 4px var(--yellow-highlight);
 }
 
 .close_btn {
