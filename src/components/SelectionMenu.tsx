@@ -1,19 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { useGameLogicStore } from "../../store";
-
 const SelectionMenu = ({
   setShowDifficulties,
+  setShowOptions,
 }: {
   setShowDifficulties: (bool: boolean) => void;
+  setShowOptions: (bool: boolean) => void;
 }) => {
-  const navigate = useNavigate();
-  const { setDifficulty, clearValues, generatePuzzle } = useGameLogicStore();
-  const createCustom = () => {
-    clearValues();
-    setDifficulty("custom");
-    generatePuzzle();
-    navigate("/game");
-  };
   return (
     <ul className="selection_menu">
       <li className="menu_item">
@@ -23,7 +14,7 @@ const SelectionMenu = ({
       </li>
 
       <li className="menu_item">
-        <button className="btn" onClick={createCustom}>
+        <button className="btn" onClick={() => setShowOptions(true)}>
           Add your own
         </button>
       </li>
