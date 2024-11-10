@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useGameLogicStore } from "../../store";
+import { useState } from "react";
+import ImageUploader from "./ImageUploader";
 
 const ManualUploadOptions = ({
   setShowOptions,
@@ -8,6 +10,7 @@ const ManualUploadOptions = ({
 }) => {
   const navigate = useNavigate();
   const { setDifficulty, clearValues, generatePuzzle } = useGameLogicStore();
+  const [uploadImage, setUploadImage] = useState<boolean>(false);
 
   const createCustomFromScratch = () => {
     clearValues();
@@ -16,19 +19,27 @@ const ManualUploadOptions = ({
     navigate("/game");
   };
 
-  const createCustomFromImage = () => {};
+  const createCustomFromImage = () => {
+    setUploadImage(true);
+  };
 
   return (
-    <div className="difficulty_menu">
-      <h1 className="title">How Would You Like To Start?</h1>
-      <ul className="difficulty_list">
-        <li className="difficulty_option" onClick={createCustomFromScratch}>
-          Start From Scratch
-        </li>
-        <li className="difficulty_option" onClick={createCustomFromImage}>
-          Upload From Image
-        </li>
-      </ul>
+    <div className="wrapper">
+      <h1 className="title">
+        {uploadImage ? "Upload Image" : "How Would You Like To Start?"}
+      </h1>
+      {uploadImage ? (
+        <ImageUploader />
+      ) : (
+        <ul className="difficulty_list">
+          <li className="difficulty_option" onClick={createCustomFromScratch}>
+            Start From Scratch
+          </li>
+          <li className="difficulty_option" onClick={createCustomFromImage}>
+            Upload From Image
+          </li>
+        </ul>
+      )}
       <button
         type="button"
         className="close_btn btn"
