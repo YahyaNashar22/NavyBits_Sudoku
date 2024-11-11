@@ -1,13 +1,11 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { recognizeImage } from "../utility/recognizeImage";
-import { useGameLogicStore } from "../../store";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+// import { useGameLogicStore } from "../../store";
+// import { useNavigate } from "react-router-dom";
 
 const ImageUploader = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const { setDifficulty, clearValues, generatePuzzleFromImage } =
-    useGameLogicStore();
-  const navigate = useNavigate();
+  // const { setDifficulty, clearValues } = useGameLogicStore();
+  // const navigate = useNavigate();
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files?.[0];
@@ -15,26 +13,18 @@ const ImageUploader = () => {
     else alert("problem uploading image!");
   };
 
-  const proceedToPuzzle = async () => {
-    if (selectedImage) {
-      clearValues();
-      setDifficulty("custom");
-      await generatePuzzleFromImage(selectedImage);
-      navigate("/game");
-    } else {
-      alert("Problem processing image");
-    }
+  const proceedToPuzzle = () => {
+    // TODO: implement the scan image functionality
+    alert("feature is under development!");
+    // if (selectedImage) {
+    //   clearValues();
+    //   setDifficulty("custom");
+    //   navigate("/game");
+    // } else {
+    //   alert("Problem processing image");
+    // }
   };
 
-  useEffect(() => {
-    const logImage = async () => {
-      if (selectedImage) {
-        const res = await recognizeImage(selectedImage);
-        console.log(res);
-      }
-    };
-    logImage();
-  }, [selectedImage]);
   return (
     <div className="wrapper">
       {!selectedImage && (

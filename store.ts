@@ -5,7 +5,6 @@ import {
   createEmptyGrid,
 } from "./src/utility/puzzleGenerator";
 import { solveSudoku } from "./src/utility/backtracking";
-import { recognizeImage } from "./src/utility/recognizeImage";
 
 export type Difficulty = "easy" | "medium" | "hard" | "custom";
 
@@ -29,7 +28,6 @@ interface CellBlockState {
   generatePuzzle: () => void;
   revealHint: () => void;
   solvePuzzle: () => void;
-  generatePuzzleFromImage: (imagePath: string) => Promise<void>;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -66,18 +64,12 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     ),
 
   setCoordinates: (id, row, column) =>
-    set(
-      (state) => {
-        const newCoordinates = { ...state.coordinates, [id]: { row, column } };
+    set((state) => {
+      const newCoordinates = { ...state.coordinates, [id]: { row, column } };
 
-        localStorage.setItem("coordinates", JSON.stringify(newCoordinates));
-        return { coordinates: newCoordinates };
-      }
-
-      //   ({
-      //   coordinates: { ...state.coordinates, [id]: { row, column } },
-      // })
-    ),
+      localStorage.setItem("coordinates", JSON.stringify(newCoordinates));
+      return { coordinates: newCoordinates };
+    }),
 
   validateAllCells: () => {
     const { values, coordinates } = get();
@@ -279,45 +271,6 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       set({ values: solvedValues });
     } else {
       alert("No solution exists");
-    }
-  },
-
-  generatePuzzleFromImage: async (imagePath: string) => {
-    try {
-      const detectedBoard = await recognizeImage(imagePath);
-      const solutionBoard = detectedBoard.map((row: number[]) => [...row]);
-
-      if (!solveSudoku(solutionBoard)) {
-        throw new Error("Could not solve detected puzzle");
-      }
-
-      // Update values with detected numbers and corresponding metadata
-      const updatedValues: Record<
-        string,
-        { value: number | null; valid: boolean; preset: boolean }
-      > = {};
-
-      detectedBoard.forEach((row: number[], rowIndex: number) => {
-        row.forEach((cell, columnIndex) => {
-          const cellId = `${rowIndex}-${columnIndex}`;
-          updatedValues[cellId] = {
-            value: cell || null,
-            valid: true,
-            preset: cell !== 0,
-          };
-        });
-      });
-
-      localStorage.setItem("puzzleValues", JSON.stringify(updatedValues));
-      localStorage.setItem("solution", JSON.stringify(solutionBoard));
-
-      set({
-        values: updatedValues,
-        solution: solutionBoard,
-        errorExists: false,
-      });
-    } catch (error) {
-      console.error("Failed to set detected puzzle:", error);
     }
   },
 }));
