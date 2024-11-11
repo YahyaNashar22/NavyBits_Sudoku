@@ -34,17 +34,3 @@ export const createPuzzle = (
 
   return puzzle;
 };
-
-export const generatePuzzleFromImage = (
-  detectedGrid: number[][]
-): { puzzle: number[][]; solution: number[][] } => {
-  // cloning grids
-  const puzzleGrid = detectedGrid.map((row) => [...row]);
-  const solutionGrid = detectedGrid.map((row) => [...row]);
-
-  if (!solveSudoku(solutionGrid)) {
-    throw new Error("Failed ti solve sudoku from detected image.");
-  }
-
-  return { puzzle: puzzleGrid, solution: solutionGrid };
-};
