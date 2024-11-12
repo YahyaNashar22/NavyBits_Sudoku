@@ -4,13 +4,19 @@ import { extractSudokuNumbers } from "../utility/extractSudokuValues";
 
 import { useGameLogicStore } from "../../store";
 import { useNavigate } from "react-router-dom";
+import CustomAlert from "./CustomAlert";
 
 const ImageUploader = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [sudokuArray, setSudokuArray] = useState<number[][]>([]);
 
-  const { setDifficulty, clearValues, generatePuzzleFromImage } =
-    useGameLogicStore();
+  const {
+    setDifficulty,
+    clearValues,
+    generatePuzzleFromImage,
+    setAlertVisible,
+    alerts,
+  } = useGameLogicStore();
   const navigate = useNavigate();
 
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +36,10 @@ const ImageUploader = () => {
         alert("Error processing the image.");
       }
     } else alert("problem uploading image!");
+  };
+
+  const confirmation = () => {
+    setAlertVisible("confirm_process", true);
   };
 
   const proceedToPuzzle = () => {
@@ -69,11 +79,21 @@ const ImageUploader = () => {
           <button
             type="button"
             className="check_result btn"
-            onClick={proceedToPuzzle}
+            onClick={confirmation}
           >
             Proceed
           </button>
         </>
+      )}
+      {alerts["confirm_process"] && (
+        <CustomAlert
+          title="Before you continue"
+          message="Sometimes when you process an image the leading empty cells might not be processed correctly resulting in a slightly different board than the one in your image. Feel free to edit misplaced cells. We will be working on a solution very shortly."
+          close={() => {
+            setAlertVisible("confirm_process", false);
+          }}
+          submit={proceedToPuzzle}
+        />
       )}
     </div>
   );
