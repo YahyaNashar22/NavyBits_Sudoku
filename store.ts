@@ -28,6 +28,7 @@ interface CellBlockState {
   generatePuzzle: () => void;
   revealHint: () => void;
   solvePuzzle: () => void;
+  generatePuzzleFromImage: (grid: number[][]) => void;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -272,5 +273,30 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     } else {
       alert("No solution exists");
     }
+  },
+
+  generatePuzzleFromImage: (grid: number[][]) => {
+    const fullGrid = createEmptyGrid();
+    const puzzleValues: Record<
+      string,
+      { value: number | null; valid: boolean; preset: boolean }
+    > = {};
+
+    fullGrid.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        const cellId = `${rowIndex}-${columnIndex}`;
+        puzzleValues[cellId] = {
+          value:
+            grid[rowIndex][columnIndex] === 0
+              ? null
+              : grid[rowIndex][columnIndex],
+          valid: true,
+          preset: false,
+        };
+      });
+    });
+    localStorage.setItem("puzzleValues", JSON.stringify(puzzleValues));
+
+    set({ values: puzzleValues, errorExists: false, solution: fullGrid });
   },
 }));

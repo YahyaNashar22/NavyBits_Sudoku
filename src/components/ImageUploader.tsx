@@ -1,28 +1,46 @@
 import { ChangeEvent, useState } from "react";
-// import { useGameLogicStore } from "../../store";
-// import { useNavigate } from "react-router-dom";
+import Tesseract from "tesseract.js";
+import { extractSudokuNumbers } from "../utility/extractSudokuValues";
+
+import { useGameLogicStore } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 const ImageUploader = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  // const { setDifficulty, clearValues } = useGameLogicStore();
-  // const navigate = useNavigate();
+  const [sudokuArray, setSudokuArray] = useState<number[][]>([]);
 
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const { setDifficulty, clearValues, generatePuzzleFromImage } =
+    useGameLogicStore();
+  const navigate = useNavigate();
+
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files?.[0];
-    if (image) setSelectedImage(URL.createObjectURL(image));
-    else alert("problem uploading image!");
+    if (image) {
+      setSelectedImage(URL.createObjectURL(image));
+
+      try {
+        const {
+          data: { text },
+        } = await Tesseract.recognize(image);
+
+        const res = extractSudokuNumbers(text);
+        setSudokuArray(res);
+      } catch (error) {
+        console.error("Error recognizing the image", error);
+        alert("Error processing the image.");
+      }
+    } else alert("problem uploading image!");
   };
 
   const proceedToPuzzle = () => {
-    // TODO: implement the scan image functionality
-    alert("feature is under development!");
-    // if (selectedImage) {
-    //   clearValues();
-    //   setDifficulty("custom");
-    //   navigate("/game");
-    // } else {
-    //   alert("Problem processing image");
-    // }
+    if (selectedImage) {
+      clearValues();
+      setDifficulty("custom");
+      generatePuzzleFromImage(sudokuArray);
+      navigate("/game");
+    } else {
+      alert("Problem processing image");
+    }
   };
 
   return (
