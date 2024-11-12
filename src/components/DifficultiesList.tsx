@@ -6,13 +6,15 @@ const DifficultiesList = ({
 }: {
   setShowDifficulties: (bool: boolean) => void;
 }) => {
-  const { clearValues, generatePuzzle, setDifficulty } = useGameLogicStore();
+  const { clearValues, generatePuzzle, setDifficulty, setStartTimer } =
+    useGameLogicStore();
   const navigate = useNavigate();
 
   const startNewGame = () => {
     clearValues();
     generatePuzzle();
     setShowDifficulties(false);
+    setStartTimer();
     navigate("/game");
   };
   return (

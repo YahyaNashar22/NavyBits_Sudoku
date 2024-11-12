@@ -2,14 +2,16 @@ import { useState } from "react";
 import DifficultiesList from "../components/DifficultiesList";
 import SelectionMenu from "../components/SelectionMenu";
 import ManualUploadOptions from "../components/ManualUploadOptions";
+import ScoreBoard from "../components/ScoreBoard";
 
 const Home = () => {
   const [showDifficulties, setShowDifficulties] = useState<boolean>(false);
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [showScoreBoard, setShowScoreBoard] = useState<boolean>(false);
 
   return (
     <main className="wrapper">
-      {!showDifficulties && !showOptions && (
+      {!showDifficulties && !showOptions && !showScoreBoard && (
         <>
           <h1 className="title">Sudoku</h1>
           <p className="subTitle">
@@ -20,6 +22,7 @@ const Home = () => {
           <SelectionMenu
             setShowDifficulties={setShowDifficulties}
             setShowOptions={setShowOptions}
+            setShowScoreBoard={setShowScoreBoard}
           />
         </>
       )}
@@ -28,6 +31,7 @@ const Home = () => {
         <DifficultiesList setShowDifficulties={setShowDifficulties} />
       )}
       {showOptions && <ManualUploadOptions setShowOptions={setShowOptions} />}
+      {showScoreBoard && <ScoreBoard setShowScoreBoard={setShowScoreBoard} />}
     </main>
   );
 };

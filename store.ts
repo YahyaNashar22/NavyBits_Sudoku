@@ -18,6 +18,8 @@ interface CellBlockState {
   errorExists: boolean;
   selectedDifficulty: Difficulty;
   solution: number[][];
+  startTimer: Date | null;
+  endTimer: Date | null;
 
   setValue: (id: string, value: number | null, valid: boolean) => void;
   setAlertVisible: (id: string, visible: boolean) => void;
@@ -29,6 +31,8 @@ interface CellBlockState {
   revealHint: () => void;
   solvePuzzle: () => void;
   generatePuzzleFromImage: (grid: number[][]) => void;
+  setStartTimer: () => void;
+  setEndTimer: () => void;
 }
 
 export const useGameLogicStore = create<CellBlockState>((set, get) => ({
@@ -41,6 +45,8 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     JSON.parse(localStorage.getItem("selectedDifficulty") as Difficulty) ||
     "medium",
   solution: [],
+  startTimer: null,
+  endTimer: null,
 
   setValue: (id, value, valid) => {
     set((state) => {
@@ -298,5 +304,13 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     localStorage.setItem("puzzleValues", JSON.stringify(puzzleValues));
 
     set({ values: puzzleValues, errorExists: false, solution: fullGrid });
+  },
+
+  setStartTimer: () => {
+    set({ startTimer: new Date() });
+  },
+
+  setEndTimer: () => {
+    set({ endTimer: new Date() });
   },
 }));

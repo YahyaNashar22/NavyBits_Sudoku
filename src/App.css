@@ -92,6 +92,14 @@ body {
   color: var(--highlight);
 }
 
+.score_input {
+  padding: 10px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+}
+
 /* cell design */
 .cell {
   height: 48px;
@@ -216,6 +224,16 @@ body {
   color: var(--primary);
 }
 
+.score_input_btn {
+  background-color: var(--highlight);
+  color: var(--primary);
+}
+
+.score_input_btn:hover {
+  background-color: var(--yellow-highlight);
+  color: var(--background);
+}
+
 /* custom dialog */
 
 .custom_dialog_overlay {
@@ -287,6 +305,38 @@ body {
 .difficulty_option:hover {
   transform: scale(1.2);
   color: var(--highlight);
+}
+
+/* Score Board Design */
+.scores_container {
+  list-style-type: none;
+  border: 1px solid var(--primary);
+  padding: 10px 20px;
+  width: 80%;
+  height: 50vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  gap: 40px
+}
+
+.score{
+  border: 1px dashed var(--primary);
+  padding: 10px 20px;
+  box-shadow: 2px 2px 2px var(--primary);
+  transition: 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.score:hover{
+  box-shadow: 4px 4px 2px var(--primary);
+  transform: translateY(-2px)
+
 }
 
 /* Mobile Styles */
