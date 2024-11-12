@@ -16,6 +16,27 @@
   --yellow-highlight: #f1fa8c;
 }
 
+/* Scrollbar styles for WebKit browsers */
+.scores_container::-webkit-scrollbar {
+  width: 1px;
+  background: var(--background);
+}
+
+.scores_container::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 10px;
+}
+
+.scores_container::-webkit-scrollbar-thumb {
+  background: var(--background);
+  border-radius: 10px;
+  background: var(--primary);
+}
+
+.scores_container::-webkit-scrollbar-thumb:hover {
+  background: var(--grid);
+}
+
 /* layout design */
 
 body {
@@ -320,23 +341,20 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  gap: 40px
+  gap: 40px;
 }
 
-.score{
+.score {
   border: 1px dashed var(--primary);
   padding: 10px 20px;
   box-shadow: 2px 2px 2px var(--primary);
   transition: 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
   width: 100%;
 }
 
-.score:hover{
+.score:hover {
   box-shadow: 4px 4px 2px var(--primary);
-  transform: translateY(-2px)
-
+  transform: translateY(-2px);
 }
 
 /* Mobile Styles */
