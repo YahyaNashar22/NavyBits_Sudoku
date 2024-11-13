@@ -19,7 +19,9 @@ const DifficultiesList = ({
   };
   return (
     <div className="difficulty_menu">
-      <h1 className="title">Select Difficulty</h1>
+      <h1 className="title">
+        Select <span style={{ color: "var(--highlight)" }}>Difficulty</span>
+      </h1>
       <ul className="difficulty_list">
         <li
           className="difficulty_option"

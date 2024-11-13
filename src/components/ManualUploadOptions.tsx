@@ -27,7 +27,17 @@ const ManualUploadOptions = ({
   return (
     <div className="wrapper">
       <h1 className="title">
-        {uploadImage ? "Upload Image" : "How Would You Like To Start?"}
+        {uploadImage ? (
+          <>
+            Upload
+            <span style={{ color: "var(--highlight)" }}> Image</span>
+          </>
+        ) : (
+          <>
+            How Would You{" "}
+            <span style={{ color: "var(--highlight)" }}>Like To Start?</span>
+          </>
+        )}
       </h1>
       {uploadImage ? (
         <ImageUploader />
