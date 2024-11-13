@@ -12,12 +12,12 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Sudoku</title>
+        <title>Sudoku | Home</title>
         <meta
           name="description"
           content="An amazing Sudoku app that lets you play and choose from three different difficulties, place your score on the score board, solve boards from scratch or by uploading an image of an existing board!"
         />
-        <meta property="og:title" content="Sudoku" />
+        <meta property="og:title" content="Sudoku | Home" />
         <meta
           property="og:description"
           content="An amazing Sudoku app that lets you play and choose from three different difficulties, place your score on the score board, solve boards from scratch or by uploading an image of an existing board!"
