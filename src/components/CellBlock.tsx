@@ -56,6 +56,7 @@ const CellBlock = ({
         value={values[id]?.value || ""}
         onChange={handleChange}
         disabled={values[id]?.preset}
+        type="number"
       />
       {alerts[id] && (
         <CustomAlert
