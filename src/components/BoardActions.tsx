@@ -1,4 +1,5 @@
 import { useGameLogicStore } from "../../store";
+import CustomAlert from "./CustomAlert";
 
 const BoardActions = ({
   setIsCompleted,
@@ -12,6 +13,7 @@ const BoardActions = ({
     revealHint,
     selectedDifficulty,
     solvePuzzle,
+    alerts,
   } = useGameLogicStore();
 
   const checkResult = () => {
@@ -67,6 +69,14 @@ const BoardActions = ({
         >
           ⭐ Solve
         </button>
+      )}
+
+      {alerts["unable_to_solve_puzzle"] && (
+        <CustomAlert
+          title="Unable To Solve"
+          message="This sudoku board is unsolvable!"
+          close={() => setAlertVisible("unable_to_solve_puzzle", false)}
+        />
       )}
     </div>
   );

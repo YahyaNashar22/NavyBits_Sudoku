@@ -178,7 +178,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   },
 
   revealHint: () => {
-    const { values, selectedDifficulty } = get();
+    const { values, selectedDifficulty, setAlertVisible } = get();
 
     if (selectedDifficulty === "custom") {
       // ! Custom Board
@@ -190,7 +190,10 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
         customGrid[row][column] = values[cellId].value || 0;
       });
 
-      if (!solveSudoku(customGrid)) return;
+      if (!solveSudoku(customGrid)) {
+        setAlertVisible("unable_to_solve_puzzle", true);
+        return;
+      }
 
       const emptyCells = Object.keys(values).filter(
         (cellId) => values[cellId].value === null
@@ -248,7 +251,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
   },
 
   solvePuzzle: () => {
-    const { values } = get();
+    const { values, setAlertVisible } = get();
 
     // Clone the current puzzle grid
     const currentGrid = Array.from({ length: 9 }, (_, row) =>
@@ -277,7 +280,8 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       localStorage.setItem("puzzleValues", JSON.stringify(solvedValues));
       set({ values: solvedValues });
     } else {
-      alert("No solution exists");
+      setAlertVisible("unable_to_solve_puzzle", true);
+      return;
     }
   },
 

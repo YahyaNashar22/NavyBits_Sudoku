@@ -9,6 +9,9 @@ const Home = () => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [showScoreBoard, setShowScoreBoard] = useState<boolean>(false);
 
+  // TODO: fix the image unable to be processed on upload
+  // TODO: add instruction component on the home page
+
   return (
     <main className="wrapper">
       {!showDifficulties && !showOptions && !showScoreBoard && (
