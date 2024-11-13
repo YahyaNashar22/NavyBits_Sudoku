@@ -1,8 +1,23 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const HowToPlay = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const handleBackButton = (event: PopStateEvent) => {
+      event.preventDefault();
+      navigate("/", { replace: true }); // Redirect to the home page without adding to history stack
+    };
+
+    // Add event listener for the popstate event
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [navigate]);
   return (
     <>
       <Helmet>

@@ -14,6 +14,21 @@ const ScoreBoard = () => {
     );
     setScores(storedScores);
   }, []);
+
+  useEffect(() => {
+    const handleBackButton = (event: PopStateEvent) => {
+      event.preventDefault();
+      navigate("/", { replace: true }); // Redirect to the home page without adding to history stack
+    };
+
+    // Add event listener for the popstate event
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [navigate]);
   return (
     <>
       <Helmet>

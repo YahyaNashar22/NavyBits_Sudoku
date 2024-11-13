@@ -5,6 +5,7 @@ import CustomAlert from "../components/CustomAlert";
 import Congratulations from "../components/Congratulations";
 import BoardActions from "../components/BoardActions";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const Game = () => {
   const {
@@ -14,7 +15,7 @@ const Game = () => {
     validateAllCells,
     setEndTimer,
   } = useGameLogicStore();
-
+  const navigate = useNavigate();
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -24,6 +25,21 @@ const Game = () => {
   useEffect(() => {
     if (isCompleted) setEndTimer();
   }, [isCompleted, setEndTimer]);
+
+  useEffect(() => {
+    const handleBackButton = (event: PopStateEvent) => {
+      event.preventDefault();
+      navigate("/", { replace: true }); // Redirect to the home page without adding to history stack
+    };
+
+    // Add event listener for the popstate event
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [navigate]);
 
   return (
     <>
