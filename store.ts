@@ -303,7 +303,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
         return;
       }
 
-      row.forEach((cell, columnIndex) => {
+      row.forEach((_, columnIndex) => {
         const cellId = `${rowIndex}-${columnIndex}`;
         puzzleValues[cellId] = {
           value:
