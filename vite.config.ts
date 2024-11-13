@@ -20,6 +20,7 @@ export default defineConfig({
         description:
           "An amazing Sudoku app that lets you play and choose from three different difficulties, place your score on the score board, solve boards from scratch or by uploading an image of an existing board!",
         theme_color: "#ffffff",
+        display: "standalone", // for better mobile support
         icons: [
           {
             src: "favicon-192x192.png",
@@ -30,12 +31,6 @@ export default defineConfig({
             src: "favicon-512x512.png",
             sizes: "512x512",
             type: "image/png",
-          },
-          {
-            src: "favicon-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any maskable",
           },
         ],
       },
