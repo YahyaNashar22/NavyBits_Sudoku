@@ -1,14 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const SelectionMenu = ({
   setShowDifficulties,
   setShowOptions,
-  setShowScoreBoard,
-  setShowHowToPlay,
 }: {
   setShowDifficulties: (bool: boolean) => void;
   setShowOptions: (bool: boolean) => void;
-  setShowScoreBoard: (bool: boolean) => void;
-  setShowHowToPlay: (bool: boolean) => void;
 }) => {
+  const navigate = useNavigate();
   return (
     <ul className="selection_menu">
       <li className="menu_item">
@@ -24,13 +23,13 @@ const SelectionMenu = ({
       </li>
 
       <li className="menu_item">
-        <button className="btn" onClick={() => setShowScoreBoard(true)}>
+        <button className="btn" onClick={() => navigate("/scoreboard")}>
           📌 Score Board
         </button>
       </li>
 
       <li className="menu_item">
-        <button className="btn" onClick={() => setShowHowToPlay(true)}>
+        <button className="btn" onClick={() => navigate("/how-to-play")}>
           🤯 How To Play
         </button>
       </li>

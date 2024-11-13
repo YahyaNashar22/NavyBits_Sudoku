@@ -56,7 +56,7 @@ body {
 }
 
 .wrapper {
-  height: 80dvh;
+  /* height: 80dvh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,6 +84,11 @@ body {
 
 .selection_menu {
   list-style-type: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu_item {
@@ -342,13 +347,14 @@ body {
   list-style-type: none;
   border: 1px solid var(--primary);
   padding: 10px 20px;
-  width: 80%;
+  width: 20%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  height: 400px;
 }
 
 .score {
@@ -357,6 +363,7 @@ body {
   box-shadow: 2px 2px 2px var(--primary);
   transition: 0.3s ease-in-out;
   width: 100%;
+  min-height: fit-content;
 }
 
 .score:hover {
@@ -367,7 +374,7 @@ body {
 /* How To Play Design */
 
 .how_to_play_container {
-  width: 80%;
+  width: 50%;
   padding: 10px 20px;
   font-size: 1.4rem;
   display: flex;
@@ -375,10 +382,11 @@ body {
   align-items: start;
   justify-content: space-between;
   overflow-y: auto;
+  gap: 20px;
 }
 
 .rules_container {
-  list-style: decimal;
+  list-style: none;
 }
 
 .rules_container li {

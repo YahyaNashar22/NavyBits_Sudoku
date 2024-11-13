@@ -1,8 +1,7 @@
-const HowToPlay = ({
-  setShowHowToPlay,
-}: {
-  setShowHowToPlay: (bool: boolean) => void;
-}) => {
+import { useNavigate } from "react-router-dom";
+
+const HowToPlay = () => {
+  const navigate = useNavigate();
   return (
     <div className="wrapper">
       <h1 className="title">
@@ -16,16 +15,17 @@ const HowToPlay = ({
         </p>
         <ul className="rules_container">
           <li>
-            Each row must contain the numbers 1 through 9 without any repeats.
+            1. Each row must contain the numbers 1 through 9 without any
+            repeats.
           </li>
           <li>
-            Each column must also have all numbers from 1 to 9, without
+            2. Each column must also have all numbers from 1 to 9, without
             repeating.
           </li>
 
           <li>
-            Each of the nine 3x3 sub-grids, or blocks, must contain the numbers
-            1 through 9 exactly once.
+            3. Each of the nine 3x3 sub-grids, or blocks, must contain the
+            numbers 1 through 9 exactly once.
           </li>
         </ul>
 
@@ -45,7 +45,7 @@ const HowToPlay = ({
       <button
         type="button"
         className="close_btn btn"
-        onClick={() => setShowHowToPlay(false)}
+        onClick={() => navigate("/")}
       >
         Cancel
       </button>
