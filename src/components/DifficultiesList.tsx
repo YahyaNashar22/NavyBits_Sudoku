@@ -13,8 +13,8 @@ const DifficultiesList = ({
   const startNewGame = () => {
     clearValues();
     generatePuzzle();
-    setShowDifficulties(false);
     setStartTimer();
+    setShowDifficulties(false);
     navigate("/game");
   };
   return (

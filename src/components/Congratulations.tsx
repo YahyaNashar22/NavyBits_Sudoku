@@ -11,7 +11,7 @@ const Congratulations = ({
   const {
     clearValues,
     generatePuzzle,
-    setEndTimer,
+    setStartTimer,
     startTimer,
     endTimer,
     selectedDifficulty,
@@ -47,7 +47,6 @@ const Congratulations = ({
   };
 
   const addScore = () => {
-    setEndTimer();
     timerCalculator();
     setIsScoreAdded(true);
   };
@@ -60,6 +59,7 @@ const Congratulations = ({
   const playAgain = () => {
     setIsCompleted(false);
     clearValues();
+    setStartTimer();
     generatePuzzle();
     navigate("/game");
   };

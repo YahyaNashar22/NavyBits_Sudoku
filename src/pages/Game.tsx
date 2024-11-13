@@ -6,14 +6,23 @@ import Congratulations from "../components/Congratulations";
 import BoardActions from "../components/BoardActions";
 
 const Game = () => {
-  const { setAlertVisible, alerts, selectedDifficulty, validateAllCells } =
-    useGameLogicStore();
+  const {
+    setAlertVisible,
+    alerts,
+    selectedDifficulty,
+    validateAllCells,
+    setEndTimer,
+  } = useGameLogicStore();
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     validateAllCells();
   }, [validateAllCells]);
+
+  useEffect(() => {
+    if (isCompleted) setEndTimer();
+  }, [isCompleted, setEndTimer]);
 
   return (
     <>
