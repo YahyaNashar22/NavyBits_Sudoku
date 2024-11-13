@@ -17,23 +17,23 @@
 }
 
 /* Scrollbar styles for WebKit browsers */
-.scores_container::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 1px;
   background: var(--background);
 }
 
-.scores_container::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: var(--background);
   border-radius: 10px;
 }
 
-.scores_container::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: var(--background);
   border-radius: 10px;
   background: var(--primary);
 }
 
-.scores_container::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: var(--grid);
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .wrapper {
-  height: 80vh;
+  height: 80dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -333,17 +333,17 @@ body {
 }
 
 /* Score Board Design */
+
 .scores_container {
   list-style-type: none;
   border: 1px solid var(--primary);
   padding: 10px 20px;
   width: 80%;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -369,7 +369,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: center;
+  justify-content: space-betweens;
 }
 
 .rules_container {

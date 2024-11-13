@@ -16,8 +16,10 @@ const ScoreBoard = ({
     setScores(storedScores);
   }, []);
   return (
-    <div className="wrapper">
-      <h1 className="title">Score Board</h1>
+    <main className="wrapper">
+      <h1 className="title">
+        Score <span style={{ color: "var(--highlight)" }}>Board</span>
+      </h1>
 
       <ul className="scores_container">
         {scores.length > 0 ? (
@@ -40,7 +42,7 @@ const ScoreBoard = ({
       >
         Cancel
       </button>
-    </div>
+    </main>
   );
 };
 

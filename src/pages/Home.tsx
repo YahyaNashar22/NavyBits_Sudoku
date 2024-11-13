@@ -11,8 +11,6 @@ const Home = () => {
   const [showScoreBoard, setShowScoreBoard] = useState<boolean>(false);
   const [showHowToPlay, setShowHowToPlay] = useState<boolean>(false);
 
-  // TODO: add instruction component on the home page
-
   return (
     <main className="wrapper">
       {!showDifficulties &&
