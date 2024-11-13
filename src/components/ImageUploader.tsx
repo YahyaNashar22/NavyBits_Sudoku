@@ -35,7 +35,7 @@ const ImageUploader = () => {
         console.error("Error recognizing the image", error);
         alert("Error processing the image.");
       }
-    } else alert("problem uploading image!");
+    } else setAlertVisible("problem_uploading_image", true);
   };
 
   const confirmation = () => {
@@ -45,6 +45,7 @@ const ImageUploader = () => {
   const proceedToPuzzle = () => {
     if (selectedImage) {
       clearValues();
+      setAlertVisible("confirm_process", false);
       setDifficulty("custom");
       generatePuzzleFromImage(sudokuArray);
       navigate("/game");
@@ -93,6 +94,16 @@ const ImageUploader = () => {
             setAlertVisible("confirm_process", false);
           }}
           submit={proceedToPuzzle}
+        />
+      )}
+
+      {alerts["problem_uploading_image"] && (
+        <CustomAlert
+          title="Image Not Uploaded"
+          message="Please check your upload again. No Image has been received"
+          close={() => {
+            setAlertVisible("problem_uploading_image", false);
+          }}
         />
       )}
     </div>

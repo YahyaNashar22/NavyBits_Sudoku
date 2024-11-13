@@ -266,7 +266,11 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       for (let row = 0; row < 9; row++) {
         for (let column = 0; column < 9; column++) {
           const cellId = `${row}-${column}`;
-          if (solvedValues[cellId].value === null) {
+          if (
+            solvedValues[cellId].value === null ||
+            solvedValues[cellId].value === 0 ||
+            solvedValues[cellId].value === undefined
+          ) {
             solvedValues[cellId] = {
               ...solvedValues[cellId],
               value: currentGrid[row][column],

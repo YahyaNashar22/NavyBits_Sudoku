@@ -9,7 +9,8 @@ const ManualUploadOptions = ({
   setShowOptions: (bool: boolean) => void;
 }) => {
   const navigate = useNavigate();
-  const { setDifficulty, clearValues, generatePuzzle } = useGameLogicStore();
+  const { setDifficulty, clearValues, generatePuzzle, setAlertVisible } =
+    useGameLogicStore();
   const [uploadImage, setUploadImage] = useState<boolean>(false);
 
   const createCustomFromScratch = () => {
@@ -43,7 +44,10 @@ const ManualUploadOptions = ({
       <button
         type="button"
         className="close_btn btn"
-        onClick={() => setShowOptions(false)}
+        onClick={() => {
+          setShowOptions(false);
+          setAlertVisible("confirm_process", false);
+        }}
       >
         Cancel
       </button>
