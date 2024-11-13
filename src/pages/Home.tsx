@@ -23,8 +23,14 @@ const Home = () => {
           content="An amazing Sudoku app that lets you play and choose from three different difficulties, place your score on the score board, solve boards from scratch or by uploading an image of an existing board!"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://localhost:5173/" />
-        <meta property="og:image" content="http://localhost:5173/favicon.ico" />
+        <meta
+          property="og:url"
+          content="https://spontaneous-shortbread-ccee9b.netlify.app/"
+        />
+        <meta
+          property="og:image"
+          content="https://spontaneous-shortbread-ccee9b.netlify.app/favicon.ico"
+        />
         <meta name="theme-color" content="#1e1e2e" />
       </Helmet>
       <main className="wrapper">
@@ -36,6 +42,7 @@ const Home = () => {
               <br />
               What would you like to do?
             </p>
+
             <SelectionMenu
               setShowDifficulties={setShowDifficulties}
               setShowOptions={setShowOptions}
