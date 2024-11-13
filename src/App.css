@@ -369,7 +369,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: space-betweens;
+  justify-content: space-between;
+  overflow-y: auto;
+  min-height: 600px;
 }
 
 .rules_container {
