@@ -14,7 +14,6 @@ const Home = () => {
   const [showHowToPlay, setShowHowToPlay] = useState<boolean>(false);
 
   // TODO: add loading state for image upload
-  // TODO: fix responsive overflow in select difficulty
 
   return (
     <>
