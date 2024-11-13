@@ -196,7 +196,8 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
       }
 
       const emptyCells = Object.keys(values).filter(
-        (cellId) => values[cellId].value === null
+        (cellId) =>
+          values[cellId].value === null || values[cellId].value === undefined
       );
 
       if (emptyCells.length === 0) return;
@@ -297,6 +298,11 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
     > = {};
 
     fullGrid.forEach((row, rowIndex) => {
+      // Check if the row exists in the grid
+      if (!grid[rowIndex]) {
+        return;
+      }
+
       row.forEach((cell, columnIndex) => {
         const cellId = `${rowIndex}-${columnIndex}`;
         puzzleValues[cellId] = {

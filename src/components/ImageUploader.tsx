@@ -33,7 +33,7 @@ const ImageUploader = () => {
         setSudokuArray(res);
       } catch (error) {
         console.error("Error recognizing the image", error);
-        alert("Error processing the image.");
+        setAlertVisible("problem_processing_image", true);
       }
     } else setAlertVisible("problem_uploading_image", true);
   };
@@ -50,7 +50,7 @@ const ImageUploader = () => {
       generatePuzzleFromImage(sudokuArray);
       navigate("/game");
     } else {
-      alert("Problem processing image");
+      setAlertVisible("problem_uploading_image", true);
     }
   };
 
@@ -103,6 +103,16 @@ const ImageUploader = () => {
           message="Please check your upload again. No Image has been received"
           close={() => {
             setAlertVisible("problem_uploading_image", false);
+          }}
+        />
+      )}
+
+      {alerts["problem_processing_image"] && (
+        <CustomAlert
+          title="Unable To Process"
+          message="Please make sure the image is clear, make sure it has a good color contrast and all the cells are visible"
+          close={() => {
+            setAlertVisible("problem_processing_image", false);
           }}
         />
       )}
