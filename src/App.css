@@ -334,14 +334,13 @@ body {
   border: 1px solid var(--primary);
   padding: 10px 20px;
   width: 80%;
-  height: 50vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  gap: 40px;
+  gap: 10px;
 }
 
 .score {
