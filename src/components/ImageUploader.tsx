@@ -8,6 +8,7 @@ import CustomAlert from "./CustomAlert";
 
 const ImageUploader = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [sudokuArray, setSudokuArray] = useState<number[][]>([]);
 
   const {
@@ -28,6 +29,7 @@ const ImageUploader = () => {
         const {
           data: { text },
         } = await Tesseract.recognize(image);
+        setLoading(false);
 
         const res = extractSudokuNumbers(text);
         setSudokuArray(res);
@@ -81,8 +83,9 @@ const ImageUploader = () => {
             type="button"
             className="check_result btn"
             onClick={confirmation}
+            disabled={loading}
           >
-            Proceed
+            {loading ? "Processing Image" : "Proceed"}
           </button>
         </>
       )}

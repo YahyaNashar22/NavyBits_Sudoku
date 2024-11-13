@@ -9,8 +9,6 @@ const Home = () => {
   const [showDifficulties, setShowDifficulties] = useState<boolean>(false);
   const [showOptions, setShowOptions] = useState<boolean>(false);
 
-  // TODO: add loading state for image upload
-
   return (
     <>
       <Helmet>
