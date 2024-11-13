@@ -371,7 +371,6 @@ body {
   align-items: start;
   justify-content: space-between;
   overflow-y: auto;
-  min-height: 600px;
 }
 
 .rules_container {
@@ -379,7 +378,7 @@ body {
 }
 
 .rules_container li {
-  margin: 20px;
+  margin: 15px 20px;
 }
 
 .tips_container {

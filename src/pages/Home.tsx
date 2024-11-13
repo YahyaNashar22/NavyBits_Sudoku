@@ -13,6 +13,9 @@ const Home = () => {
   const [showScoreBoard, setShowScoreBoard] = useState<boolean>(false);
   const [showHowToPlay, setShowHowToPlay] = useState<boolean>(false);
 
+  // TODO: add loading state for image upload
+  // TODO: fix responsive overflow in select difficulty
+
   return (
     <>
       <Helmet>
@@ -29,7 +32,7 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://localhost:5173/" />
         <meta property="og:image" content="http://localhost:5173/favicon.ico" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#1e1e2e" />
       </Helmet>
       <main className="wrapper">
         {!showDifficulties &&

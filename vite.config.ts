@@ -19,7 +19,7 @@ export default defineConfig({
         short_name: "Sudoku",
         description:
           "An amazing Sudoku app that lets you play and choose from three different difficulties, place your score on the score board, solve boards from scratch or by uploading an image of an existing board!",
-        theme_color: "#ffffff",
+        theme_color: "#1e1e2e",
         display: "standalone", // for better mobile support
         icons: [
           {
