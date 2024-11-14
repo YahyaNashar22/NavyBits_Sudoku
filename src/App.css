@@ -135,10 +135,12 @@ body {
 
 .score_input {
   padding: 10px;
+  margin: auto;
   text-align: center;
   font-size: 1.4rem;
   font-weight: bold;
   font-family: "Courier New", Courier, monospace;
+  width: 100%;
 }
 
 /* cell design */
@@ -213,6 +215,10 @@ body {
 .btn:active {
   transform: scale(0.9);
   box-shadow: 2px 2px 10px 4px var(--editable-cell-background);
+}
+
+.btn:disabled {
+  cursor: not-allowed !important;
 }
 
 .check_result_btn:hover {
