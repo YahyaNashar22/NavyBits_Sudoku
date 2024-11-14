@@ -107,6 +107,7 @@ const ImageUploader = () => {
 
   // * Submit Button Functionality
   const handleProcessImage = async () => {
+    setSudokuArray([]);
     setCurrentStep("Processing image...");
     setLoading(true);
     try {
@@ -158,6 +159,7 @@ const ImageUploader = () => {
               setSelectedImage(null);
               setSudokuArray([]);
             }}
+            disabled={loading}
           >
             Retake
           </button>
