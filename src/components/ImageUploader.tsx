@@ -68,7 +68,7 @@ const ImageUploader = () => {
             );
             const resizedCell = new cv.Mat();
             cv.resize(cellImg, resizedCell, new cv.Size(50, 50));
-            setCurrentStep(`Cell [${row},${col}] processed.`);
+            setCurrentStep(`Cell [${row},${col}] processed...`);
 
             // Convert each cell to Blob for Tesseract
             const canvas = document.createElement("canvas");
@@ -186,13 +186,13 @@ const ImageUploader = () => {
             </button>
           )}
 
-          <h3>{currentStep}</h3>
+          <h3 style={{ textAlign: "center" }}>{currentStep}</h3>
         </>
       )}
       {alerts["confirm_process"] && (
         <CustomAlert
           title="Before you continue"
-          message="Sometimes when you process an image the leading empty cells might not be processed correctly resulting in a slightly different board than the one in your image. Feel free to edit misplaced cells. We will be working on a solution very shortly."
+          message="Sometimes when you process an it might not be processed correctly resulting in a slightly different board than the one in your image. Please make sure the image is correctly showing a valid Sudoku board. Feel free to edit misplaced cells."
           close={() => {
             setAlertVisible("confirm_process", false);
           }}
