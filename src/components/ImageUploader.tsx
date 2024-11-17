@@ -108,9 +108,9 @@ const ImageUploader = () => {
   // * Submit Button Functionality
   const handleProcessImage = async () => {
     setSudokuArray([]);
-    setCurrentStep("Processing image...");
-    setLoading(true);
     try {
+      setCurrentStep("Processing image...");
+      setLoading(true);
       await preprocessImage();
     } catch (error) {
       console.log(error);
