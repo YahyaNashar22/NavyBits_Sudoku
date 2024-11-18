@@ -271,7 +271,7 @@ export const useGameLogicStore = create<CellBlockState>((set, get) => ({
             solvedValues[cellId].value === null ||
             solvedValues[cellId].value === 0 ||
             solvedValues[cellId].value === undefined ||
-            Number.isNaN(solvedValues[cellId].value)
+            isNaN(solvedValues[cellId].value)
           ) {
             solvedValues[cellId] = {
               ...solvedValues[cellId],

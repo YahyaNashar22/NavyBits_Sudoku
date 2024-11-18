@@ -11,8 +11,14 @@ const CellBlock = ({
   row: number;
   column: number;
 }) => {
-  const { values, alerts, setValue, setAlertVisible, setCoordinates } =
-    useGameLogicStore();
+  const {
+    values,
+    alerts,
+    setValue,
+    setAlertVisible,
+    setCoordinates,
+    coordinates,
+  } = useGameLogicStore();
 
   useEffect(() => {
     setCoordinates(id, row, column);
@@ -52,7 +58,7 @@ const CellBlock = ({
               ? "var(--error-highlight)"
               : "",
         }}
-        title={id}
+        title={`${coordinates[id].row}-${coordinates[id].column}`}
         value={values[id]?.value || ""}
         onChange={handleChange}
         disabled={values[id]?.preset}
