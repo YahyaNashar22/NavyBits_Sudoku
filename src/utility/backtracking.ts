@@ -2,12 +2,7 @@ const findEmpty = (grid: number[][]): [number, number] | null => {
   for (let row = 0; row < 9; row++) {
     for (let column = 0; column < 9; column++) {
       // return the coordinates of the empty cell
-      if (
-        grid[row][column] === 0 ||
-        grid[row][column] === null ||
-        grid[row][column] === undefined
-      )
-        return [row, column];
+      if (grid[row][column] === 0) return [row, column];
     }
   }
   return null;

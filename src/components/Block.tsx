@@ -1,28 +1,16 @@
 import CellBlock from "./CellBlock";
 
-const Block = ({
-  blockId,
-  startRow,
-  startColumn,
-}: {
-  blockId: string;
-  startRow: number;
-  startColumn: number;
-}) => {
+const Block = ({ cells }: { cells: { row: number; column: number }[] }) => {
   return (
     <div className="block">
-      {Array.from({ length: 9 }, (_, index) => {
-        const row = startRow + Math.floor(index / 3);
-        const column = startColumn + (index % 3);
-        return (
-          <CellBlock
-            key={index}
-            id={`${blockId}-${index}`}
-            row={row}
-            column={column}
-          />
-        );
-      })}
+      {cells.map(({ row, column }, index) => (
+        <CellBlock
+          key={index}
+          id={`${row}-${column}`}
+          row={row}
+          column={column}
+        />
+      ))}
     </div>
   );
 };
