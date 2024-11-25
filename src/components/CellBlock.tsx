@@ -58,7 +58,7 @@ const CellBlock = ({
               ? "var(--error-highlight)"
               : "",
         }}
-        title={`${coordinates[id].row}-${coordinates[id].column}`}
+        title={`${coordinates[id]?.row}-${coordinates[id]?.column}`}
         value={values[id]?.value || ""}
         onChange={handleChange}
         disabled={values[id]?.preset}
